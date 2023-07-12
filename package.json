@@ -2,10 +2,11 @@
   "name": "fiverrbot",
   "version": "1.0.0",
   "description": "An api to refresh online status on fiverr",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start":"netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "author": "Prasad",
   "license": "ISC",
@@ -13,7 +14,9 @@
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "netlify-lambda": "^2.0.16",
     "nodemon": "^3.0.1",
+    "serverless-http": "^3.2.0",
     "telegraf": "^4.12.2"
   }
 }

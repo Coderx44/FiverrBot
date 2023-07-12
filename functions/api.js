@@ -1,20 +1,22 @@
 const express = require('express')
 const app = express()
+const router = express.Router()
+const serverless = require('serverless-http')
 const axios = require("axios");
-const path = require("path")
-const port = process.env.PORT || 3000;
+
 app.use(express.static('static'))
 app.use(express.json());
+
 require('dotenv').config();
 const { Telegraf } = require('telegraf');
 const { json } = require('body-parser');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
 res.send("Welcome");
 });
-
+app.use('/.netlify/functions/api',router);
 bot.launch()
 
 bot.command('start', ctx => {
@@ -58,6 +60,6 @@ bot.command('start', ctx => {
     setInterval(makeRequest, 5 * 60 * 1000);
   });
 
-app.listen(()=>{
-console.log("server started")
-})
+
+
+module.exports.handler = serverless(app)
