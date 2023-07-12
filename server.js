@@ -58,6 +58,6 @@ bot.command('start', ctx => {
     setInterval(makeRequest, 5 * 60 * 1000);
   });
 
-app.listen(()=>{
+app.listen(port, ()=>{
 console.log("server started")
 })
