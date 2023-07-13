@@ -15,7 +15,14 @@ app.get("/", (req, res) => {
 res.send("Welcome");
 });
 
-bot.launch()
+app.post('/your-webhook-endpoint', (req, res) => {
+  bot.handleUpdate(req.body);
+  res.sendStatus(200);
+});
+
+bot.telegram.setWebhook('https://fiverrbot.onrender.com/your-webhook-endpoint');
+bot.startWebhook('/your-webhook-endpoint', null, 80); // Replace 3000 with your desired port
+
 
 bot.command('start', ctx => {
     console.log(ctx.update.message.text)
